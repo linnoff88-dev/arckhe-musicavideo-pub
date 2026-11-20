@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>musicavideo-pub — the showcase for the collection</title>
+<meta content="A Next.js app that publishes a music video collection without hosting media: files come from a public Hugging Face dataset via range requests, and only text is transferred during the build." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<style>
+  :root{
+    --bg:#0c0c10; --bg2:#14141b; --card:#16161e; --line:#272730;
+    --txt:#e9e9ee; --mut:#9a9aa6; --amb:#E2A23B; --amb2:#f0c070; --sky:#38bdf8; --pro:#cbd5e1;
+    color-scheme:dark;
+  }
+  body.light{
+    --bg:#f6f7f9; --bg2:#eceef2; --card:#ffffff; --line:#e1e3ea;
+    --txt:#1a1a22; --mut:#5b5b68; --amb:#b9791d; --amb2:#a16207; --sky:#0369a1; --pro:#b45309;
+    color-scheme:light;
+  }
+  body.light .hero .glow{opacity:.5}
+  body.light pre{background:#0e0e14;color:#d6d6e0}
+  body.light pre .c{color:#8a8a98}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:Sora,sans-serif;line-height:1.15;margin:0}
+  a{color:var(--amb);text-decoration:none}
+  code,pre{font-family:"JetBrains Mono",monospace}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+  .mut{color:var(--mut)} .amb{color:var(--amb)}
+  .chip{display:inline-block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amb);font-weight:600;font-family:Sora}
+  nav{position:sticky;top:0;z-index:30;backdrop-filter:blur(12px);background:rgba(12,12,16,.78);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:22px;height:60px}
+  nav .brand{display:flex;align-items:center;gap:8px;font-family:Sora;font-weight:800;letter-spacing:-.02em;color:var(--amb)}
+  nav .brand .emoji{font-size:1.25rem}
+  nav .sep{color:var(--mut);opacity:.45}
+  nav .inema{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .inema:hover{filter:brightness(1.15)}
+  nav .pro{color:var(--pro);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .pro:hover{filter:brightness(1.15)}
+  nav .clubpro{display:inline-flex;align-items:center;gap:6px}
+  nav .links{margin-left:auto;display:flex;align-items:center;gap:20px;font-size:.92rem}
+  nav .links a.sec{color:var(--mut)} nav .links a.sec:hover{color:var(--txt)}
+  .tgl{background:var(--bg2);border:1px solid var(--line);color:var(--txt);width:38px;height:38px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:1.05rem}
+  .tgl:hover{border-color:var(--amb)}
+  .btn{display:inline-block;background:var(--amb);color:#1a1206;font-weight:600;padding:.6em 1.05em;border-radius:10px;font-family:Sora}
+  .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+  @media(max-width:760px){nav .links a.sec{display:none}}
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  .hero .glow{position:absolute;inset:-40% -20% auto auto;width:70%;height:600px;background:radial-gradient(closest-side,rgba(226,162,59,.22),transparent 70%);pointer-events:none}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:74px 22px}
+  .hero h1{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;letter-spacing:-.025em}
+  .hero p.lead{font-size:1.18rem;color:var(--mut);margin:1.1em 0 1.6em;max-width:34ch}
+  .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .hero figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000}
+  .hero figure img{width:100%;display:block}
+  @media(max-width:780px){.hero .wrap{grid-template-columns:1fr;padding:48px 22px}}
+  section{padding:62px 0;border-bottom:1px solid var(--line)}
+  section h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:800;letter-spacing:-.02em}
+  section .sub{color:var(--mut);margin:.6em 0 2em;max-width:62ch}
+  .grid{display:grid;gap:16px}
+  .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:820px){.g3,.g4{grid-template-columns:1fr 1fr}}
+  @media(max-width:540px){.g2,.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .card h3{font-size:1.05rem;margin-bottom:.4em}
+  .card p{color:var(--mut);font-size:.92rem;margin:0}
+  .num{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:8px;background:rgba(226,162,59,.14);color:var(--amb);font-family:Sora;font-weight:800;font-size:.9rem;margin-bottom:.7em}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+  .flow span{background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:.45em .9em;font-size:.85rem;font-family:Sora;font-weight:600}
+  .flow .arr{color:var(--amb);border:none;background:none;padding:0 .1em}
+  pre{background:#0a0a0e;border:1px solid var(--line);border-radius:12px;padding:16px 18px;overflow:auto;font-size:.86rem;line-height:1.6;color:#d6d6e0}
+  pre .c{color:#6f6f7c} pre .k{color:var(--amb2)} pre .s{color:#9ece6a}
+  .step{display:grid;grid-template-columns:46px 1fr;gap:16px;margin-bottom:26px}
+  .step .b{width:46px;height:46px;border-radius:12px;background:var(--amb);color:#1a1206;font-family:Sora;font-weight:800;font-size:1.25rem;display:flex;align-items:center;justify-content:center}
+  .step h3{font-size:1.12rem;margin-bottom:.3em}
+  .step p{color:var(--mut);margin:.2em 0 .7em}
+  .ex{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:680px){.ex{grid-template-columns:1fr}}
+  .ex figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+  .ex figure img{width:100%;display:block}
+  .ex figcaption{padding:12px 14px;font-size:.88rem;color:var(--mut);background:var(--card)}
+  .phase{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .phase:last-child{border:none}
+  .phase .tag{flex:0 0 92px;font-family:Sora;font-weight:800;color:var(--amb)}
+  .phase .d strong{display:block;margin-bottom:.2em}
+  .phase .d span{color:var(--mut);font-size:.92rem}
+  footer{padding:46px 0;text-align:center;color:var(--mut);font-size:.9rem}
+  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.3em .8em;font-size:.78rem;color:var(--mut);margin:0 4px}
+</style>
+<link href="https://inematds.github.io/musicavideo-pub/guia/" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/musicavideo-pub/guia/en/" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/musicavideo-pub/guia/es/" hreflang="es" rel="alternate"/></head>
+<body><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="./" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">EN</a><a href="../es/" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<nav><div class="wrap">
+<a class="brand" href="#top"><span class="emoji">📺</span> musicavideo-pub</a>
+<span class="sep">|</span>
+<span class="clubpro">
+<a class="inema" href="https://inema.club" rel="noopener" target="_blank">INEMA.CLUB</a>
+<span class="sep">-</span>
+<a class="pro" href="https://inema.pro" rel="noopener" target="_blank">PRO</a>
+</span>
+<div class="links">
+<a class="sec" href="#oque">What it is</a>
+<a class="sec" href="#fluxo">How it works</a>
+<a class="sec" href="#guia">User Guide</a>
+<a class="sec" href="#exemplos">Examples</a>
+<a class="sec" href="#roadmap">Roadmap</a>
+<button aria-label="Toggle theme" class="tgl" id="themeToggle" title="Toggle theme">🌙</button>
+<a class="btn" href="https://github.com/inematds/musicavideo-pub" rel="noopener" target="_blank">GitHub</a>
+</div>
+</div></nav>
+<header class="hero" id="top">
+<div class="glow"></div>
+<div class="wrap">
+<div>
+<span class="chip">the collection showcase · INEMA MUSICAVIDEO V2</span>
+<h1>A music video collection on the web — <span class="amb">without hosting a single byte of video</span>.</h1>
+<p class="lead">The videos, tracks, and covers live in a public Hugging Face dataset, and the browser fetches them directly from there. This app loads only the text, which makes it lightweight and inexpensive, and keeps it running even if the media goes down.</p>
+<div class="cta">
+<a class="btn" href="#guia">Start the guide</a>
+<a class="btn ghost" href="https://github.com/inematds/musicavideo-pub" rel="noopener" target="_blank">View on GitHub</a>
+</div>
+</div>
+<figure><img alt="Project cover for musicavideo-pub" src="../assets/hero.jpg"/></figure>
+</div>
+</header>
+<section id="oque"><div class="wrap">
+<span class="chip">What it is</span>
+<h2>The split that makes the numbers work</h2>
+<p class="sub">Video is the most expensive file to serve and the hardest to host. Here, it never passes through this app: only text travels during deployment, while the heavy files stay where they’re already served for free with range requests.</p>
+<div class="grid g3">
+<div class="card"><h3>🎞️ The media never passes through here</h3><p>Videos, tracks, and covers come from the public dataset <code>Inematds/musicavideo-acervo</code>. O <code>resolve/main</code> from Hugging Face responds <em>range request</em> — the video bar navigates without any proxy, and the app pays nothing for bandwidth or storage.</p></div>
+<div class="card"><h3>📝 The text travels in the build</h3><p>Titles, lyrics, prompts, and the shot breakdown come from a <code>manifest.json</code> versioned in the repo itself. The page renders without a network trip — if Hugging Face goes down, it still shows the entire collection as text.</p></div>
+<div class="card"><h3>🎵 One song, one page</h3><p>Suno delivers two tracks per request, and each one is a different song: same lyrics, another interpretation. Each track has its own card, address, and page, with the video opening at the top.</p></div>
+</div>
+</div></section>
+<section id="fluxo"><div class="wrap">
+<span class="chip">How it works</span>
+<h2>Approval is the only human action</h2>
+<p class="sub">This app is the final stop on a path that starts in the local musicavideo dashboard—the workbench where you listen, compare, and send things to the trash. Uploading isn’t what happens when something is finished: finished production is work material; a showcase is a choice.</p>
+<div class="flow">
+<span>local dashboard</span><span class="arr">→</span>
+<span>approves</span><span class="arr">→</span>
+<span>publica-hf</span><span class="arr">→</span>
+<span>dataset on Hugging Face</span><span class="arr">→</span>
+<span>manifest.json in the repo</span><span class="arr">→</span>
+<span>this app</span><span class="arr">→</span>
+<span>audience likes</span><span class="arr">→</span>
+<span>back to the dashboard</span>
+</div>
+</div></section>
+<section id="pre"><div class="wrap">
+<span class="chip">Prerequisites</span>
+<h2>Node and a dataset. Everything else is optional.</h2>
+<p class="sub">The app runs without any keys — the collection is public and the manifest is in the repo. Only likes need infrastructure, and without it, the showcase still works as a showcase.</p>
+<div class="grid g3">
+<div class="card"><h3>Node.js</h3><p>Next.js 16, no database and no service dependencies for rendering. The manifest is imported as a module.</p><pre><span class="k">npm install</span>
+<span class="k">npm run dev</span>   <span class="c"># http://localhost:3000</span></pre></div>
+<div class="card"><h3>The collection on Hugging Face</h3><p>Public dataset, written by the <code>musicavideo publica-hf</code>. Switching datasets is a variable.</p><pre><span class="c"># optional — this is already the default</span>
+HF_REPO=<span class="s">Inematds/musicavideo-acervo</span></pre></div>
+<div class="card"><h3>Redis REST — only for likes</h3><p>It's the only writing from the audience, which is why the app isn't pure static HTML. <strong>The app keeps running without these variables</strong>: the counter disappears and the click isn't persisted.</p><pre>KV_REST_API_URL
+KV_REST_API_TOKEN
+<span class="c"># in Vercel: Storage → Upstash Redis</span></pre></div>
+</div>
+</div></section>
+<section id="guia"><div class="wrap">
+<span class="chip">User Guide · step by step</span>
+<h2>From disk to public address</h2>
+<p class="sub">Commands with <code>musicavideo</code> run in the pipeline repo (<a href="https://github.com/inematds/musicavideo">inematds/musicavideo</a>); those for <code>npm</code>, here.</p>
+<div class="step"><div class="b">1</div><div>
+<h3>Approve in the local dashboard what goes to the showcase</h3>
+<p>One click on the card marks the production in the <code>estado.json</code>. Unchecking doesn't delete what was already uploaded — it creates a removal task, executed on the next publication.</p>
+<pre><span class="k">musicavideo painel</span>          <span class="c"># the workbench, on :5400</span>
+<span class="k">musicavideo nuvem</span> MVD#113   <span class="c"># or the button on the card</span></pre>
+</div></div>
+<div class="step"><div class="b">2</div><div>
+<h3>Publish — one command that ends with the push</h3>
+<p>Uploads to Hugging Face <strong>only what changed</strong>, write the <code>manifest.json</code> in this repo and commits it. Running it twice in a row doesn't reread anything.</p>
+<pre><span class="k">musicavideo publica-hf</span> --dry   <span class="c"># what would be uploaded, without uploading it</span>
+<span class="k">musicavideo publica-hf</span>         <span class="c"># upload, write the manifest, commit, and push</span>
+<span class="k">musicavideo publica-hf</span> --manifesto  <span class="c"># metadata only, without resending media</span></pre>
+</div></div>
+<div class="step"><div class="b">3</div><div>
+<h3>Run the showcase on your machine</h3>
+<p>The manifest is imported as a module, so the app works offline for all text—the media is what needs a network connection.</p>
+<pre><span class="k">npm install</span>
+<span class="k">npm run dev</span>     <span class="c"># :3000</span>
+<span class="k">npm run build</span>   <span class="c"># make sure all pages build</span></pre>
+</div></div>
+<div class="step"><div class="b">4</div><div>
+<h3>Find a song by its address</h3>
+<p>Each production has a number — the same one as the bot that generated it — and each track has its own page. The old route by production still responds and redirects to the approved version.</p>
+<pre><span class="s">/mvd-113-v1</span>   <span class="c"># track 1 of that production</span>
+<span class="s">/mvd-113-v2</span>   <span class="c"># track 2 — same lyrics, different interpretation</span>
+<span class="s">/mvd-113</span>      <span class="c"># old route: redirects to the approved version</span>
+<span class="s">/analises</span>     <span class="c"># what analisevideo measured from real videos</span></pre>
+</div></div>
+<div class="step"><div class="b">5</div><div>
+<h3>Enable likes (optional)</h3>
+<p>In Vercel: <strong>Storage → Create Database → Upstash Redis</strong>, connect it to the project, and redeploy — the variables are injected automatically. The token must be the one for <em>writing</em>; read-only access won't work.</p>
+<pre><span class="c"># the counter is an atomic INCR per track: MVD#113:1</span>
+<span class="k">curl</span> <span class="s">"$URL/api/like?mvd=mvd-113:1"</span></pre>
+</div></div>
+<div class="step"><div class="b">6</div><div>
+<h3>Bring likes back to the dashboard</h3>
+<p>It's the only audience signal the project has. Without that feedback, it would die here.</p>
+<pre><span class="k">MUSICAVIDEO_PUB_URL</span>=<span class="s">https://sua-vitrine.vercel.app</span> \
+  <span class="k">musicavideo likes</span>   <span class="c"># turns into ♥ on each card in the local dashboard</span></pre>
+</div></div>
+<div class="step"><div class="b">7</div><div>
+<h3>Publishing app changes means git push</h3>
+<p>Import this repo into Vercel with <em>Root Directory</em> <code>./</code>. From then on, the webhook handles the rest — there's no manual deploy step.</p>
+<pre><span class="k">git push</span>   <span class="c"># deploy happens through the git → Vercel webhook</span></pre>
+</div></div>
+</div></section>
+<section id="exemplos"><div class="wrap">
+<span class="chip">Examples</span>
+<h2>The showcase, running</h2>
+<p class="sub">Screenshots of the live app, with today's collection: 27 productions and 53 songs.</p>
+<div class="ex">
+<figure><img alt="The collection grid, one card per song" src="../assets/ex1.jpg"/><figcaption>The grid: one card per <strong>music</strong>, not per production. Each cover shows the version badge, who approved it, and a ▶ clip badge when there's a video.</figcaption></figure>
+<figure><img alt="A song page, with the video at the top" src="../assets/ex2.jpg"/><figcaption>A song page: the video opens first and fills the width. Below are the cover, audio, like, and the prompt that generated it all.</figcaption></figure>
+</div>
+</div></section>
+<section id="roadmap"><div class="wrap">
+<span class="chip">Roadmap</span>
+<h2>Where it is and what’s missing</h2>
+<p class="sub">V1 (the local dashboard) and V2 (this showcase) are two apps, not a migration: turning this one off doesn't turn the other off.</p>
+<div class="phase"><div class="tag">live</div><div class="d"><strong>Public collection, one page per song</strong><span>Media on Hugging Face via range requests, manifest in the repo, stable route by bot number (<code>MVD#113</code>), and the video analytics tab.</span></div></div>
+<div class="phase"><div class="tag">live</div><div class="d"><strong>Publish with one command</strong><span>O <code>publica-hf</code> uploads only what changed and ends at <code>git push</code> from the manifest — no uploading gigabytes only for the showcase to keep displaying the previous version.</span></div></div>
+<div class="phase"><div class="tag">is missing</div><div class="d"><strong>Likes enabled</strong><span>The code is ready, and the app runs without it. You still need to create the Redis REST database and redeploy — see step 5.</span></div></div>
+<div class="phase"><div class="tag">is missing</div><div class="d"><strong>Likes come back automatically</strong><span>Today, the <code>musicavideo likes</code> runs manually. A like comes in when the audience clicks, not when it's approved — it's the only part of the cycle without a natural human action to trigger it.</span></div></div>
+</div></section>
+<footer>
+<div class="wrap">
+<div class="pill">Next.js 16</div><div class="pill">Hugging Face Datasets</div><div class="pill">Vercel</div><div class="pill">Redis REST</div>
+<p style="margin-top:18px">musicavideo-pub · the showcase for <a href="https://github.com/inematds/musicavideo">musicavideo</a> ·
+      <a href="https://github.com/inematds/musicavideo-pub">inematds/musicavideo-pub</a> ·
+      <a href="https://inema.club">INEMA.CLUB</a></p>
+</div>
+</footer>
+<script>
+  (function(){
+    var KEY='musicavideo-pub-theme';
+    var b=document.body, t=document.getElementById('themeToggle');
+    if(localStorage.getItem(KEY)==='light'){ b.classList.add('light'); t.textContent='☀️'; }
+    t.addEventListener('click',function(){
+      var light=b.classList.toggle('light');
+      t.textContent=light?'☀️':'🌙';
+      localStorage.setItem(KEY, light?'light':'dark');
+    });
+  })();
+</script>
+</body>
+</html>
