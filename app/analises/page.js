@@ -4,7 +4,7 @@ export const revalidate = 3600;
 export const metadata = { title: 'INEMA MUSICAVIDEO V2 — análises de vídeo' };
 
 // A análise sobe como TEXTO, e só. O `fonte.mp4` — o vídeo de terceiros baixado
-// do YouTube — nunca sai da máquina: re-hospedar seria redistribuição de obra
+// do YouTube — nunca sai da máquina: re-hospedar seria redistribuiçêo de obra
 // alheia, e o valor da análise é o que está escrito nela. O vídeo original
 // aparece pelo embed oficial, quando há URL de origem.
 export default async function Analises() {

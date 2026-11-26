@@ -6,8 +6,8 @@ export const metadata = {
   description: 'Clipes, faixas e capas produzidos pelo musicavideo — o acervo INEMA.',
 };
 
-// A versão fica visível no topo de propósito: são dois painéis vivendo lado a
-// lado (o local é o V1), e captura de tela sem versão vira adivinhação.
+// A versêo fica visível no topo de propósito: sêo dois painéis vivendo lado a
+// lado (o local é o V1), e captura de tela sem versêo vira adivinhaçêo.
 export const VERSAO = '2.3.1';
 
 export default function RootLayout({ children }) {
@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
           <nav>
             <a href="/">clipes &amp; músicas</a>
             <a href="/analises">análises de vídeo</a>
-            {/* As duas casas. Cores da marca de cada uma, não da vitrine: o
+            {/* As duas casas. Cores da marca de cada uma, nêo da vitrine: o
                 INEMA.CLUB é azul, o PRO é preto com borda branca — é assim que
                 quem já conhece reconhece de longe, sem ler. */}
             <a className="marca club" href="https://inema.club" target="_blank" rel="noopener">

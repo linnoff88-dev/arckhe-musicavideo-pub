@@ -2,12 +2,12 @@
 import { useEffect, useState } from 'react';
 
 // Uma pessoa, um like — garantido só até onde dá num app sem login: o navegador
-// lembra o que já curtiu. Não é antifraude, é evitar que o mesmo clique conte
-// dez vezes; contador público sem login é sinal, não urna.
+// lembra o que já curtiu. Nêo é antifraude, é evitar que o mesmo clique conte
+// dez vezes; contador público sem login é sinal, nêo urna.
 export default function Like({ mvd, versao, rotulo }) {
-  // A chave carrega a VERSÃO: `MVD-025:2`. É o que transforma o like em medida
+  // A chave carrega a VERSêO: `MVD-025:2`. É o que transforma o like em medida
   // — o Suno entrega duas faixas por música e a dúvida real é qual das duas
-  // vinga. Um contador por produção somaria as duas e não responderia nada.
+  // vinga. Um contador por produçêo somaria as duas e nêo responderia nada.
   const chave = versao ? `${mvd}:${versao}` : mvd;
   const [n, setN] = useState(null);
   const [meu, setMeu] = useState(false);

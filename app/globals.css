@@ -1,5 +1,5 @@
 /* A mesma paleta do painel local: quem abre os dois tem que ver o mesmo lugar,
-   não dois produtos. Dark âmbar INEMA. */
+   nêo dois produtos. Dark âmbar INEMA. */
 :root {
   --bg: #0d0b09;
   --card: #171310;
@@ -93,7 +93,7 @@ header.topo nav a[aria-current="page"] {
 .irmas { margin: 14px 0 4px; }
 
 /* As DUAS capas lado a lado, cada uma com o seu play — igual ao painel local:
-   a escolha entre a versão 1 e a 2 não precisa de um clique para começar. */
+   a escolha entre a versêo 1 e a 2 nêo precisa de um clique para começar. */
 .duas {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(92px, 1fr));
@@ -120,7 +120,7 @@ header.topo nav a[aria-current="page"] {
 .pal { display: flex; gap: 4px; margin-top: 7px; }
 .pal i { width: 16px; height: 16px; border-radius: 4px; display: block; }
 
-/* ficha de uma produção */
+/* ficha de uma produçêo */
 .ficha { padding: 20px 22px 60px; max-width: 900px; }
 .ficha h2 { margin: 0 0 4px; font-size: 22px; }
 .versao {
@@ -176,7 +176,7 @@ button.like .rot { font-size: 11.5px; letter-spacing: .3px; }
 .duas button.like { margin-top: 2px; padding: 3px 9px; font-size: 12px; align-self: stretch;
   justify-content: center; }
 
-/* As duas casas do ecossistema, com a cor de cada marca — não com a da vitrine.
+/* As duas casas do ecossistema, com a cor de cada marca — nêo com a da vitrine.
    Quem já conhece reconhece pela cor antes de ler o nome. */
 header.topo nav a.marca {
   font-weight: 700; letter-spacing: .5px; font-size: 12.5px;
