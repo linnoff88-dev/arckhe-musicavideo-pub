@@ -1,9 +1,9 @@
-# CHANGELOG — INEMA MUSICAVIDEO V2
+# CHANGELOG — ARCKHÉ MUSICAVIDEO V2
 
 ## 2.2.0 — 2026-08-27
 
 - **O nome no topo volta para o acervo.** De dentro da página de uma música,
-  clicar em "INEMA MUSICAVIDEO" leva para casa — é o gesto que todo mundo tenta
+  clicar em "ARCKHÉ MUSICAVIDEO" leva para casa — é o gesto que todo mundo tenta
   antes de procurar um link de voltar, e ele nêo fazia nada.
 
 - **Uma música, um card, uma página.** O Suno entrega duas faixas por pedido e
@@ -18,7 +18,7 @@
 - **Selo de clipe no card**, porque a pergunta que o card faz é "tem vídeo
   aqui?". Quem nêo tem diz por quê, em vez de mostrar um espaço vazio.
 - **O `#` do número do bot nêo vai mais para a URL.** Produçêo numerada pelo
-  `inemaccbot` chega como `MVD#122`; `/mvd#122` seria lido como âncora e o link
+  `ARCKHÉccbot` chega como `MVD#122`; `/mvd#122` seria lido como âncora e o link
   morreria em `/mvd`. Todo id passa por um sanitizador (`MVD#122` → `mvd-122`),
   e o encontro continua aceitando a forma crua.
 - **Rota antiga preservada.** `/mvd-013` continua respondendo: manda para a
@@ -36,7 +36,7 @@
 - **O texto vem no repo.** O manifesto (títulos, letras, prompts, decupagem e as
   análises) vive em `data/manifest.json` e viaja no build: a página desenha sem
   depender de rede. No Hugging Face fica só mídia.
-- **Topo com as três casas**: INEMA.CLUB (azul), INEMA.PRO (preto e branco) e o
+- **Topo com as três casas**: ARCKHÉ AI (azul), ARCKHÉ.PRO (preto e branco) e o
   canal @amoanimais2k (vermelho), cada um na cor da sua marca.
 
 ## 2.0.0 — 2026-08-27

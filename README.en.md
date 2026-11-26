@@ -1,16 +1,16 @@
-# musicavideo-pub — INEMA MUSICAVIDEO V2.x.x
+# musicavideo-pub — ARCKHÉ MUSICAVIDEO V2.x.x
 
 **🇧🇷 [Português](README.md) · 🇺🇸 [English](README.en.md) · 🇪🇸 [Español](README.es.md)**
 
-The **showcase** for the [musicavideo](https://github.com/inematds/musicavideo) collection:
+The **showcase** for the [musicavideo](https://github.com/linnoff88-dev/musicavideo) collection:
 the clips, tracks, and covers served from Hugging Face, with the dashboard on Vercel.
 
 ## 📖 User guide
 
-Complete guide (landing page + step-by-step instructions): **https://inematds.github.io/musicavideo-pub/guia/en/**
+Complete guide (landing page + step-by-step instructions): **https://linnoff88-dev.github.io/arckhe-/guia/en/**
 
 Don’t confuse it with **the dashboard** — that’s the local one (`musicavideo painel`,
-`INEMA MUSICAVIDEO V1.x.x`), where you listen, compare, send items to the trash, and
+`ARCKHÉ MUSICAVIDEO V1.x.x`), where you listen, compare, send items to the trash, and
 **approve what gets uploaded here**. This is read-only, with one exception: the
 public **like**.
 
@@ -26,7 +26,7 @@ painel local  --aprova-->  publica-hf  -->  dataset no Hugging Face
                                    musicavideo likes  -->  painel local
 ```
 
-- **Files:** public dataset `Inematds/musicavideo-acervo`. The `<video>` and
+- **Files:** public dataset `linnoff88-dev/musicavideo-acervo`. The `<video>` and
   `<audio>` elements fetch directly from there — HF’s `resolve/main` supports range requests
   (verified: HTTP 206 with `Content-Range` on a 101 MB mp4), so you can seek through
   the video without any proxy. This app never serves media.

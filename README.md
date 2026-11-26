@@ -1,4 +1,4 @@
-ï»¿# musicavideo-pub ê¢â¬â INEMA MUSICAVIDEO V2.x.x
+ï»¿# musicavideo-pub ê¢â¬â ARCKHÉ MUSICAVIDEO V2.x.x
 
 <div align="center">
   <img src="capa/logo.svg" alt="Arckhé AI" height="48" />
@@ -8,15 +8,15 @@
 
 **ê°Å¸â¡Â§ê°Å¸â¡Â· [PortuguêÂªs](README.md) êÂ· ê°Å¸â¡Âºê°Å¸â¡Â¸ [English](README.en.md) êÂ· ê°Å¸â¡Âªê°Å¸â¡Â¸ [EspaêÂ±ol](README.es.md)**
 
-A **vitrine** do acervo do [musicavideo](https://github.com/inematds/musicavideo):
+A **vitrine** do acervo do [musicavideo](https://github.com/linnoff88-dev/musicavideo):
 os clipes, as faixas e as capas servidos do Hugging Face, o painel na Vercel.
 
 ## ê°Å¸ââ Guia de uso
 
-Guia completo (landing + passo a passo): **https://inematds.github.io/musicavideo-pub/guia/**
+Guia completo (landing + passo a passo): **https://linnoff88-dev.github.io/arckhe-/guia/**
 
 NêÂ£o confundir com **o painel** ê¢â¬â esse êÂ© o local (`musicavideo painel`,
-`INEMA MUSICAVIDEO V1.x.x`), onde se ouve, se compara, se manda para a lixeira e
+`ARCKHÉ MUSICAVIDEO V1.x.x`), onde se ouve, se compara, se manda para a lixeira e
 onde se **aprova o que sobe para cêÂ¡**. Aqui êÂ© sêÂ³ leitura, com uma exceêÂ§êÂ£o: o
 **like** do pêÂºblico.
 
@@ -32,7 +32,7 @@ painel local  --aprova-->  publica-hf  -->  dataset no Hugging Face
                                    musicavideo likes  -->  painel local
 ```
 
-- **Arquivos:** dataset pêÂºblico `Inematds/musicavideo-acervo`. Os `<video>` e
+- **Arquivos:** dataset pêÂºblico `linnoff88-dev/musicavideo-acervo`. Os `<video>` e
   `<audio>` buscam direto lêÂ¡ ê¢â¬â o `resolve/main` do HF serve range request
   (verificado: HTTP 206 com `Content-Range` num mp4 de 101 MB), entêÂ£o a barra do
   vêÂ­deo navega sem proxy nenhum. Esta app nunca serve mêÂ­dia.

@@ -2,8 +2,8 @@ import Link from 'next/link';
 import './globals.css';
 
 export const metadata = {
-  title: 'INEMA MUSICAVIDEO V2.2.0',
-  description: 'Clipes, faixas e capas produzidos pelo musicavideo — o acervo INEMA.',
+  title: 'ARCKHÉ MUSICAVIDEO V2.2.0',
+  description: 'Clipes, faixas e capas produzidos pelo musicavideo — o acervo ARCKHÉ.',
 };
 
 // A versêo fica visível no topo de propósito: sêo dois painéis vivendo lado a
@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
               já tenta antes de procurar um link de voltar. */}
           <h1>
             <Link href="/">
-              INEMA MUSICAVIDEO <span>V{VERSAO}</span>
+              ARCKHÉ MUSICAVIDEO <span>V{VERSAO}</span>
             </Link>
           </h1>
           <span className="sub">o acervo</span>
@@ -28,13 +28,13 @@ export default function RootLayout({ children }) {
             <a href="/">clipes &amp; músicas</a>
             <a href="/analises">análises de vídeo</a>
             {/* As duas casas. Cores da marca de cada uma, nêo da vitrine: o
-                INEMA.CLUB é azul, o PRO é preto com borda branca — é assim que
+                ARCKHÉ AI é azul, o PRO é preto com borda branca — é assim que
                 quem já conhece reconhece de longe, sem ler. */}
-            <a className="marca club" href="https://inema.club" target="_blank" rel="noopener">
-              INEMA.CLUB
+            <a className="marca club" href="https://ARCKHÉ AI" target="_blank" rel="noopener">
+              ARCKHÉ AI
             </a>
-            <a className="marca pro" href="https://inema.pro" target="_blank" rel="noopener">
-              INEMA.PRO
+            <a className="marca pro" href="https://ARCKHÉ.pro" target="_blank" rel="noopener">
+              ARCKHÉ.PRO
             </a>
             {/* O canal onde os clipes viram vídeo publicado. É o destino final
                 de tudo que está nesta página — sai daqui e vai para lá. */}

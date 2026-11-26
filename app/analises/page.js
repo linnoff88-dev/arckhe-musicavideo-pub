@@ -1,7 +1,7 @@
 import { carregarAcervo, ytid } from '@/lib/acervo';
 
 export const revalidate = 3600;
-export const metadata = { title: 'INEMA MUSICAVIDEO V2 — análises de vídeo' };
+export const metadata = { title: 'ARCKHÉ MUSICAVIDEO V2 — análises de vídeo' };
 
 // A análise sobe como TEXTO, e só. O `fonte.mp4` — o vídeo de terceiros baixado
 // do YouTube — nunca sai da máquina: re-hospedar seria redistribuiçêo de obra
